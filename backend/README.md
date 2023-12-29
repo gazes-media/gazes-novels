@@ -27,3 +27,17 @@ nix develop .#backend
 This command ensures that the necessary dependencies and tools for backend development are set up in your environment. Execute this step to kickstart your coding journey seamlessly.
 
 By following these steps, you'll have a well-configured development environment ready for coding in the project. Happy coding!
+
+## Step 4: Integrating VSCode with Nix
+
+If you prefer using Visual Studio Code (VSCode) for development and want to seamlessly integrate it with Nix, follow these simple steps:
+
+1. Open VSCode In Project Directory:
+Run the following command in your terminal:
+```bash
+code .
+```
+
+This command opens VSCode in the current directory, ensuring that you have access to the correct tools and configurations for you Nix-based project.
+
+That's it! Now you can enjoy the benefits of using VSCode with your Nix environment effortlessly.
