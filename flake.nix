@@ -10,7 +10,7 @@
     in {
       devShells.${system}.backend = pkgs.mkShell {
         packages = with pkgs; [
-          go_1_21_5
+          go_1_21
           gotools
         ];
       };
