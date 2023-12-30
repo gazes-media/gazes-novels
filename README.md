@@ -1,43 +1,56 @@
-# Setting Up Your Development Environment
+# Gazes Novels: Guidelines for Contributions
+*Crafted with ❤️ by l31*
 
-Before you start writing code for this project, it's crucial to establish the right development environment. Follow these steps to ensure a smooth setup:
+Greetings, esteemed developers! Welcome to the vibrant realm of **Gazes Novels**, a dynamic hub dedicated to the creation and enjoyment of web novels. If you're eager to contribute your coding expertise to this noble endeavor, please acquaint yourself with the rules and guidelines outlined in this comprehensive document.
 
-## Step 1: Install Nix
+## Project Overview
 
-If you don't have Nix installed on your system, you need to install it first. Follow the instructions in [this guide](https://zero-to-nix.com/start/install) to set up Nix. For Windows users, makes sure to enable and use [WSL2](https://learn.microsoft.com/fr-fr/windows/wsl/install).
+**Gazes Novels** is ingeniously crafted using the Go programming language, with GORM serving as our trusted Object-Relational Mapping (ORM) tool and PostgreSQL as the preferred database. It's important to note that our tech stack is a dynamic entity, open to evolution, and this document will gracefully adapt to any changes.
 
-## Step 2: Activate Nix Command and Flake Experimental Features
+## Making Your Impact
 
-If you haven't already activated the Nix command and flake experimental features, add the following line to your `~/.config/nix/nix.conf` file:
+### Setting the Foundation
+
+Before immersing yourself in the thrilling world of contribution, ensure you have [nix](https://nixos.org/) installed. Fear not, as we've streamlined the process with a one-liner, courtesy of [zero-to-nix](https://zero-to-nix.com/). Execute the following command to initiate the installation:
 
 ```bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+Follow the steps presented by the installer. Once completed, a touch of configuration awaits. Activate some experimental features, specifically `nix-command` and `nix-flakes`. Edit either the file `/etc/nix/nix.conf` or `~/.config/nix/nix.conf` and append the following line:
+
+```conf
 experimental-features = nix-command flakes
 ```
 
-This step enables additional features that enhance the functionality of Nix, providing you with a more powerful development experience.
+Save your changes, and voilà! You're all set for the next step!
 
-## Step 3: Initialize Backend Development Environment
+### Embark on Your Coding Journey
 
-Once Nix is set up, initiate the development environment specifically tailored for backend work in this project. Run the following command:
+Fantastic! With nix securely installed, let's delve into the exhilarating realm of coding. Begin your journey by forking, cloning, and opening a development shell. It's worth noting that we maintain a dedicated shell for each project within this mono-repo.
 
-```bash
-nix develop .#backend
-```
+1. **Fork & Clone:**
 
-This command ensures that the necessary dependencies and tools for backend development are set up in your environment. Execute this step to kickstart your coding journey seamlessly.
+    Fork the project and proceed to clone it using the following command:
 
-By following these steps, you'll have a well-configured development environment ready for coding in the project. Happy coding!
+    ```bash
+    git clone https://github.com/<your-username>/gazes-novels.git
+    ```
 
-## Step 4: Integrating VSCode with Nix
+2. **Navigate to Project:**
 
-If you prefer using Visual Studio Code (VSCode) for development and want to seamlessly integrate it with Nix, follow these simple steps:
+    Move into the project you're eager to contribute to; for instance, let's explore the `backend` project:
 
-1. Open VSCode In Project Directory:
-Run the following command in your terminal:
-```bash
-code .
-```
+    ```bash
+    cd gazes-novels/backend
+    ```
 
-This command opens VSCode in the current directory, ensuring that you have access to the correct tools and configurations for you Nix-based project.
+3. **Launch the Development Shell:**
 
-That's it! Now you can enjoy the benefits of using VSCode with your Nix environment effortlessly.
+    Take the next step by opening the development shell:
+
+    ```bash
+    nix develop
+    ```
+
+    Well done! Your coding environment is ready. Let the coding festivities commence!
