@@ -34,11 +34,22 @@ func (n *Novel) AddChapter(title, content string) (*Chapter, error) {
 		NovelID: n.ID,
 	}
 
-	if err := database.DB().Create(chapter).Error; err != nil {
+	tx := database.DB().Begin()
+	if err := tx.Create(chapter).Error; err != nil {
+		tx.Rollback()
 		return nil, err
 	}
 
 	n.Chapters = append(n.Chapters, *chapter)
+
+	if err := tx.Model(n).Association("Chapters").Append(chapter); err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+
+	if err := tx.Commit().Error; err != nil {
+		return nil, err
+	}
 
 	return chapter, nil
 }
