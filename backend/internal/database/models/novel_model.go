@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/gazes-media/gazes-novels/internal/database"
 	"gorm.io/gorm"
 )
@@ -14,14 +16,23 @@ type Novel struct {
 	Chapters []Chapter `json:"chapters" gorm:"foreignKey:NovelID"`
 }
 
-func CreateNovel(title, synopsis string) (*Novel, error) {
+func CreateNovel(title, synopsis string, authorID uint) (*Novel, error) {
+	tx := database.DB().Begin()
+
 	novel := &Novel{
 		Title:    title,
 		Synopsis: synopsis,
+		AuthorID: authorID,
 	}
 
-	if err := database.DB().Create(novel).Error; err != nil {
-		return nil, err
+	if err := tx.Create(novel).Error; err != nil {
+		tx.Rollback()
+		return nil, fmt.Errorf("failed to create novel: %w", err)
+	}
+
+	if err := tx.Commit().Error; err != nil {
+		tx.Rollback()
+		return nil, fmt.Errorf("failed to commit transaction: %w", err)
 	}
 
 	return novel, nil
