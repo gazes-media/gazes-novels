@@ -13,6 +13,8 @@
           go_1_21
           gotools
           gopls
+          xclip
+          eza
         ];
 
         shellHook = ''
@@ -21,6 +23,8 @@
           export DB_PASSWORD=""
           export DB_NAME=""
           export DB_PORT=""
+
+          alias gdc='git diff --cached | xclip -selection clipboard'
         '';
       };
     };
