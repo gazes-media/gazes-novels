@@ -8,11 +8,20 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      devShells.${system}.backend = pkgs.mkShell {
+      devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
           go_1_21
           gotools
+          gopls
         ];
+
+        shellHook = ''
+          export DB_HOST=""
+          export DB_USER=""
+          export DB_PASSWORD=""
+          export DB_NAME=""
+          export DB_PORT=""
+        '';
       };
     };
 }
