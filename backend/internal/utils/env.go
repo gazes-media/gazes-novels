@@ -1,4 +1,4 @@
-// Package utils provides utility functions for common tasks.
+// Package utils provides utility functions for handling environment variables.
 package utils
 
 import (
@@ -6,26 +6,9 @@ import (
 	"os"
 )
 
-// Getenv retrieves values for the specified environment variable keys.
-// It returns a map containing the key-value pairs of the found environment variables.
-// An error is returned if any of the specified keys are not found in the environment.
-//
-// Example usage:
-//
-//	keys := []string{"KEY1", "KEY2", "KEY3"}
-//	values, err := Getenv(keys)
-//	if err != nil {
-//	    log.Fatal(err)
-//	}
-//	// Access values using keys
-//	valueForKey1 := values["KEY1"]
-//
-// If any of the specified environment variables is not found, the error message
-// will indicate the missing keys.
-//
-// Example error:
-//
-//	missing environment variables: [KEY2 KEY3]
+// Getenv retrieves the values of environment variables specified by the keys.
+// It returns a map of key-value pairs of the retrieved environment variable values.
+// If any specified environment variable is missing, it returns an error indicating the missing variables.
 func Getenv(keys []string) (map[string]string, error) {
 	values := make(map[string]string)
 	missing := []string{}

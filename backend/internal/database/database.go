@@ -1,3 +1,4 @@
+// Package database manages the database connection and provides utility functions for database operations.
 package database
 
 import (
@@ -11,33 +12,23 @@ import (
 
 var databaseInstance *gorm.DB
 
-// DB returns the application's database instance.
-// If the database instance has not been initialized, it creates a new connection using
-// the configuration settings retrieved from the `config.GetConfig()` function.
-//
-// Example usage:
-//
-//	db := DB()
-//	// Use db for database operations
+// DB returns the database instance and initializes a connection if it's not already established.
+// It connects to the configured PostgreSQL database using the values from the application configuration.
 func DB() *gorm.DB {
 	if databaseInstance == nil {
-		// Retrieve database configuration from the application's configuration
 		cfg := config.GetConfig()
 
-		// Create the data source name (DSN) for the PostgreSQL connection
 		dsn := fmt.Sprintf(
 			"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Europe/Paris",
 			cfg.DBHost, cfg.DBUser, cfg.DBPassword, cfg.DBName, cfg.DBPort,
 		)
 
-		// Open a new database connection using GORM
 		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		// Set the database instance
 		databaseInstance = db
 	}
 
