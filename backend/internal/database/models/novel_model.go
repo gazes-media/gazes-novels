@@ -7,9 +7,10 @@ import (
 
 type Novel struct {
 	gorm.Model
-	Title    string `json:"title"`
-	Synopsis string `json:"author"`
-
+	Title    string    `json:"title"`
+	Synopsis string    `json:"synopsis"`
+	Author   User      `json:"author" gorm:"foreignKey:AuthorID"`
+	AuthorID uint      `json:"-"`
 	Chapters []Chapter `json:"chapters" gorm:"foreignKey:NovelID"`
 }
 
