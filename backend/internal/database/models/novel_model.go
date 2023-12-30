@@ -30,6 +30,11 @@ func CreateNovel(title, synopsis string, authorID uint) (*Novel, error) {
 		return nil, fmt.Errorf("failed to create novel: %w", err)
 	}
 
+	if err := tx.Preload("Author").First(novel, novel.ID).Error; err != nil {
+		tx.Rollback()
+		return nil, fmt.Errorf("failed to preload author information: %w", err)
+	}
+
 	if err := tx.Commit().Error; err != nil {
 		tx.Rollback()
 		return nil, fmt.Errorf("failed to commit transaction: %w", err)

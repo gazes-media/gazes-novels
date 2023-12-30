@@ -10,15 +10,13 @@ import (
 type User struct {
 	gorm.Model
 	Username  string    `json:"username"`
-	Email     string    `json:"email"`
 	Birthdate time.Time `json:"birthdate"`
 	Novels    []Novel   `json:"novels" gorm:"foreignKey:AuthorID"`
 }
 
-func CreateUser(username, email string, birthdate time.Time) (*User, error) {
+func CreateUser(username string, birthdate time.Time) (*User, error) {
 	user := &User{
 		Username:  username,
-		Email:     email,
 		Birthdate: birthdate,
 	}
 
