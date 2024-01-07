@@ -9,7 +9,7 @@ import (
 // Getenv retrieves the values of environment variables specified by the keys.
 // It returns a map of key-value pairs of the retrieved environment variable values.
 // If any specified environment variable is missing, it returns an error indicating the missing variables.
-func Getenv(keys []string) (map[string]string, error) {
+func GetEnv(keys []string) (map[string]string, error) {
 	values := make(map[string]string)
 	missing := []string{}
 

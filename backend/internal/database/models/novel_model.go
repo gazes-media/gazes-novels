@@ -23,7 +23,7 @@ type Novel struct {
 // It returns a pointer to the created novel and an error if any.
 func CreateNovel(title, synopsis string, authorID uint) (*Novel, error) {
 	// Transaction begins for creating the novel
-	tx := database.DB().Begin()
+	tx := database.GetDB().Begin()
 
 	novel := &Novel{
 		Title:    title,
@@ -59,7 +59,7 @@ func (n *Novel) AddChapter(title, content string) (*Chapter, error) {
 		NovelID: n.ID,
 	}
 
-	tx := database.DB().Begin()
+	tx := database.GetDB().Begin()
 	if err := tx.Create(chapter).Error; err != nil {
 		tx.Rollback()
 		return nil, err
@@ -83,7 +83,7 @@ func (n *Novel) AddChapter(title, content string) (*Chapter, error) {
 // It returns a pointer to the novel and an error if any.
 func GetNovelByID(id uint) (*Novel, error) {
 	var novel Novel
-	if err := database.DB().Preload("Chapters").First(&novel, id).Error; err != nil {
+	if err := database.GetDB().Preload("Chapters").First(&novel, id).Error; err != nil {
 		return nil, err
 	}
 
@@ -94,7 +94,7 @@ func GetNovelByID(id uint) (*Novel, error) {
 // It returns a slice of novels and an error if any.
 func GetAllNovels() ([]Novel, error) {
 	var novels []Novel
-	if err := database.DB().Preload("Chapters").Find(&novels).Error; err != nil {
+	if err := database.GetDB().Preload("Chapters").Find(&novels).Error; err != nil {
 		return nil, err
 	}
 
