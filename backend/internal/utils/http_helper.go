@@ -7,13 +7,16 @@ import (
 
 func RespondJSON(w http.ResponseWriter, data interface{}, statusCode ...int) {
 	w.Header().Set("Content-Type", "application/json")
+
+	code := http.StatusOK
 	if len(statusCode) > 0 {
-		w.WriteHeader(statusCode[0])
-	} else {
-		w.WriteHeader(http.StatusOK)
+		code = statusCode[0]
 	}
+
+	w.WriteHeader(code)
+
 	err := json.NewEncoder(w).Encode(data)
 	if err != nil {
-		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
