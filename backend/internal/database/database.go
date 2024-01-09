@@ -14,7 +14,7 @@ var databaseInstance *gorm.DB
 
 // DB returns the database instance and initializes a connection if it's not already established.
 // It connects to the configured PostgreSQL database using the values from the application configuration.
-func DB() *gorm.DB {
+func GetDB() *gorm.DB {
 	if databaseInstance == nil {
 		cfg := config.GetConfig()
 

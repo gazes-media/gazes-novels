@@ -18,7 +18,7 @@ func TestGetenv(t *testing.T) {
 	}
 	defer unsetEnvVars(keys1)
 
-	result1, err1 := Getenv(keys1)
+	result1, err1 := GetEnv(keys1)
 
 	if err1 != nil {
 		t.Errorf("Unexpected error in TestGetenv (case 1): %v", err1)
@@ -39,7 +39,7 @@ func TestGetenv(t *testing.T) {
 	}
 	defer unsetEnvVars(keys2)
 
-	result2, err2 := Getenv(keys2)
+	result2, err2 := GetEnv(keys2)
 
 	if err2 == nil {
 		t.Error("Expected error in TestGetenv (case 2), but got nil")
