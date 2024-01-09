@@ -8,5 +8,6 @@ import (
 
 func NewRouter() http.Handler {
 	router := mux.NewRouter()
+	router.HandleFunc("/login", PostLogin).Methods("POST")
 	return router
 }
