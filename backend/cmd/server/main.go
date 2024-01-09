@@ -1,7 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"os"
+
+	"github.com/gazes-media/gazes-novels/internal/api"
+)
 
 func main() {
-	fmt.Println("hello world");
+	router := api.NewRouter()
+
+	fmt.Printf("Listening on port %s...\n", os.Getenv("PORT"))
+	http.ListenAndServe("0.0.0.0:"+os.Getenv("PORT"), router)
+
 }
