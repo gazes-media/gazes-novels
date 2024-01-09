@@ -12,5 +12,8 @@ func RespondJSON(w http.ResponseWriter, data interface{}, statusCode ...int) {
 	} else {
 		w.WriteHeader(http.StatusOK)
 	}
-	json.NewEncoder(w).Encode(data)
+	err := json.NewEncoder(w).Encode(data)
+	if err != nil {
+		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+	}
 }
