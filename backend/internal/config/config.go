@@ -22,7 +22,7 @@ var configInstance *Config
 // It fetches environment variables related to database configuration and initializes the Config instance.
 func GetConfig() *Config {
 	if configInstance == nil {
-		v, err := utils.Getenv([]string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_PORT"})
+		v, err := utils.GetEnv([]string{"DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "DB_PORT"})
 
 		if err != nil {
 			log.Fatal(err)

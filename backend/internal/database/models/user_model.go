@@ -25,7 +25,7 @@ func CreateUser(username string, birthdate time.Time) (*User, error) {
 		Birthdate: birthdate,
 	}
 
-	if err := database.DB().Create(user).Error; err != nil {
+	if err := database.GetDB().Create(user).Error; err != nil {
 		return nil, err
 	}
 
